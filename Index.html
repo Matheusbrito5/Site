@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Master - O Básico que Funciona</title>
+    
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1497918614592795');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1497918614592795&ev=PageView&noscript=1"
+    /></noscript>
+    <style>
+        :root {
+            --excel-green: #107c41;
+            --dark-bg: #1e1e1e;
+            --gold: #ffc107;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        /* HERO SECTION */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            border-bottom: 5px solid var(--excel-green);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        h2 {
+            color: var(--excel-green);
+            font-size: 1.6rem;
+            margin-top: 0;
+            font-weight: 600;
+        }
+        .headline-sub {
+            font-size: 1.2rem;
+            color: #dddddd;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* BOTÃO */
+        .btn-cta {
+            background-color: var(--excel-green);
+            color: white;
+            padding: 20px 45px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(16, 124, 65, 0.5);
+            animation: pulse 2s infinite;
+            margin-top: 10px;
+            border: 2px solid #159c53;
+        }
+        .btn-cta:hover {
+            transform: scale(1.05);
+            background-color: #0c5c30;
+            cursor: pointer;
+        }
+        
+        /* SESSÕES */
+        .section-white {
+            background-color: white;
+            color: #333;
+            padding: 60px 20px;
+        }
+        .section-white h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        .benefit-list {
+            text-align: left;
+            max-width: 500px;
+            margin: 30px auto;
+            list-style: none;
+            padding: 0;
+        }
+        .benefit-list li {
+            margin-bottom: 18px;
+            font-size: 1.15rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .check {
+            color: var(--excel-green);
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* OFERTA */
+        .price-box {
+            background-color: #262626;
+            border: 2px solid var(--gold);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-top: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .old-price {
+            font-size: 1.3rem;
+            text-decoration: line-through;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .new-price {
+            font-size: 4rem;
+            color: var(--gold);
+            font-weight: 800;
+            margin: 0;
+            line-height: 1;
+        }
+        .bonus-tag {
+            background-color: var(--gold);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 124, 65, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 124, 65, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 124, 65, 0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .new-price { font-size: 3rem; }
+            .btn-cta { width: 80%; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Excel Master</h1>
+            <h2>O Básico que Funciona</h2>
+            <p class="headline-sub">Domine as ferramentas essenciais para passar em testes de emprego e se destacar no trabalho. Sem enrolação.</p>
+            
+            <a href="https://pay.kiwify.com.br/FCNu3ve" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">
+                QUERO MINHA VAGA AGORA ➔
+            </a>
+        </div>
+    </header>
+
+    <div class="section-white">
+        <div class="container">
+            <h3>Cansado de travar na frente da planilha?</h3>
+            <p style="font-size: 1.1rem;">Você não precisa de um curso teórico de 100 horas. <br>Você precisa aprender o que as empresas <strong>REALMENTE</strong> cobram no dia a dia.</p>
+            
+            <ul class="benefit-list">
+                <li><span class="check">✓</span> <div><strong>Fórmulas que Salvam:</strong> Aprenda PROCV, SE, SOMASE de forma simples.</div></li>
+                <li><span class="check">✓</span> <div><strong>Tabelas Dinâmicas:</strong> Crie relatórios que impressionam chefes.</div></li>
+                <li><span class="check">✓</span> <div><strong>Produtividade:</strong> Atalhos que fazem você trabalhar 10x mais rápido.</div></li>
+                <li><span class="check">✓</span> <div><strong>Certificado Incluso:</strong> Para turbinar seu currículo.</div></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 60px;">
+        <div class="price-box">
+            <span class="bonus-tag">Oferta por Tempo Limitado</span>
+            <p style="margin-top: 15px; font-size: 1.1rem;">Leve o acesso completo:</p>
+            
+            <div class="old-price">De R$ 97,00</div>
+            <div class="new-price">R$ 37,00</div>
+            <p style="color: #ccc; margin-top: 5px;">Pagamento Único | Acesso Vitalício</p>
+            
+            <a href="https://pay.kiwify.com.br/FCNu3ve" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">
+                COMPRAR AGORA
+            </a>
+            
+            <div style="margin-top: 25px; border-top: 1px solid #444; padding-top: 20px;">
+                <p style="font-size: 0.95rem; color: #aaa; line-height: 1.4;">
+                    🔒 <strong>Compra 100% Segura</strong><br>
+                    7 Dias de Garantia Incondicional.
+                </p>
+                <p style="font-size: 0.9rem; color: #ffc107; margin-top: 15px;">
+                    <strong>🎁 BÔNUS NO CARRINHO:</strong><br>
+                    Libere o <em>Pack de Planilhas</em> e o <em>Guia de Bolso</em> com desconto exclusivo na próxima etapa.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: #111; padding: 30px; text-align: center; color: #555; font-size: 0.8rem; border-top: 1px solid #222;">
+        &copy; 2025 Excel Master. Todos os direitos reservados.<br>
+        Este site não é afiliado ao Facebook ou Meta.
+    </footer>
+
+</body>
+</html>
