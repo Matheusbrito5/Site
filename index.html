@@ -27,7 +27,7 @@
             --gold: #ffc107;
             --white: #ffffff;
             --gray-card: #2d2d2d;
-            --alert-red: #ef4444;
+            --alert-red: #dc2626;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -36,10 +36,10 @@
             background-color: var(--dark-bg);
             color: var(--white);
             line-height: 1.6;
-            padding-top: 40px; /* Espaço para a barra do timer */
+            padding-top: 45px; /* Espaço para o timer fixo */
         }
         
-        /* BARRA DO TIMER */
+        /* 1. BARRA DO TIMER (FIXO NO TOPO) */
         .sticky-timer {
             position: fixed;
             top: 0;
@@ -48,22 +48,23 @@
             background-color: var(--alert-red);
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             font-weight: bold;
             z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-size: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
         }
-        .timer-count {
+        .timer-box {
             background: rgba(0,0,0,0.3);
             padding: 2px 8px;
-            border-radius: 4px;
+            border-radius: 5px;
             font-family: monospace;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
 
         /* HEADER / HERO */
@@ -78,14 +79,14 @@
         h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; }
         h2 { color: var(--excel-green); font-size: 1.5rem; margin-top: 10px; }
         
-        /* CONTAINER GERAL */
+        /* CONTAINER */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* GRID DE PREÇOS (OFERTA) */
+        /* GRID DE PREÇOS */
         .pricing-section {
             display: flex;
             flex-wrap: wrap;
@@ -94,7 +95,7 @@
             margin-top: 20px;
         }
 
-        /* CARD INDIVIDUAL */
+        /* CARDS */
         .card {
             background-color: var(--gray-card);
             border: 1px solid #444;
@@ -109,7 +110,6 @@
             transition: transform 0.3s;
         }
 
-        /* DESTAQUE DO VITALÍCIO (CENTRO) */
         .card.featured {
             border: 3px solid var(--gold);
             background-color: #383838;
@@ -121,9 +121,8 @@
         .plan-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: #ddd; text-transform: uppercase; }
         .price { font-size: 3rem; font-weight: 800; margin: 10px 0; color: white; }
         .period { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
-        
-        /* Cores específicas */
         .price-gold { color: var(--gold); }
+        
         .tag-destaque {
             background-color: var(--gold);
             color: black;
@@ -151,11 +150,10 @@
         }
         .btn-green { background-color: var(--excel-green); color: white; }
         .btn-green:hover { background-color: #0c5c30; }
-        
         .btn-gold { background-color: var(--gold); color: black; border: 2px solid #e0a800; }
         .btn-gold:hover { background-color: #d39e00; }
 
-        /* LISTA DE BENEFÍCIOS DENTRO DO CARD */
+        /* LISTA */
         .benefits {
             list-style: none;
             padding: 0;
@@ -171,56 +169,51 @@
         }
         .check { color: var(--excel-green); margin-right: 5px; }
 
-        /* POPUP DE NOTIFICAÇÃO DE VENDAS */
-        .sales-notification {
+        /* 2. NOTIFICAÇÃO POPUP (CSS) */
+        #sales-popup {
+            visibility: hidden; /* Começa invisível */
             position: fixed;
             bottom: 20px;
             left: 20px;
             background-color: white;
             color: #333;
             padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             gap: 15px;
-            z-index: 1000;
-            transform: translateX(-150%); /* Começa escondido */
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 300px;
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
             border-left: 5px solid var(--excel-green);
+            max-width: 320px;
         }
-        .sales-notification.active {
-            transform: translateX(0);
+        /* Classe que faz aparecer */
+        #sales-popup.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
         }
-        .sales-icon {
-            font-size: 24px;
-            color: var(--excel-green);
-        }
-        .sales-text strong {
-            display: block;
-            font-size: 0.9rem;
-        }
-        .sales-text span {
-            font-size: 0.8rem;
-            color: #666;
-        }
+        .sales-icon { font-size: 24px; }
+        .sales-info strong { display: block; font-size: 0.95rem; color: #111; }
+        .sales-info span { font-size: 0.85rem; color: #666; }
 
-        /* RESPONSIVO */
         @media (max-width: 768px) {
             .pricing-section { flex-direction: column; align-items: center; }
             .card { width: 100%; max-width: 320px; }
             .card.featured { transform: scale(1); margin: 20px 0; }
-            .sticky-timer { font-size: 0.8rem; }
-            .sales-notification { bottom: 10px; left: 10px; right: 10px; max-width: none; }
+            .sticky-timer { font-size: 0.85rem; }
+            #sales-popup { left: 10px; right: 10px; bottom: 10px; max-width: none; }
         }
     </style>
 </head>
 <body>
 
     <div class="sticky-timer">
-        <span>🔥 OFERTA ENCERRA EM:</span>
-        <span class="timer-count" id="countdown">15:00</span>
+        <span>⚠️ ÚLTIMAS VAGAS COM DESCONTO:</span>
+        <span class="timer-box" id="timer-display">14:59</span>
     </div>
 
     <header>
@@ -237,13 +230,11 @@
                 <div class="plan-name">PLANO START</div>
                 <div class="price">R$ 27</div>
                 <div class="period">Acesso por 3 Meses</div>
-                
                 <ul class="benefits">
                     <li><span class="check">✔</span> Curso Completo</li>
                     <li><span class="check">✔</span> Certificado Incluso</li>
                     <li><span class="check">✔</span> Suporte Básico</li>
                 </ul>
-
                 <a href="https://pay.kiwify.com.br/mX3muvA" class="btn btn-green" onclick="fbq('track', 'InitiateCheckout');">COMPRAR AGORA</a>
             </div>
 
@@ -252,14 +243,12 @@
                 <div class="plan-name" style="color: var(--gold);">PLANO BLACK</div>
                 <div class="price price-gold">R$ 67</div>
                 <div class="period" style="color: white;">Acesso <strong>VITALÍCIO</strong></div>
-                
                 <ul class="benefits">
                     <li><span class="check">✔</span> <strong>Acesso Eterno</strong></li>
                     <li><span class="check">✔</span> Suporte Prioritário</li>
                     <li><span class="check">✔</span> Atualizações Grátis</li>
                     <li><span class="check">✔</span> Certificado Master</li>
                 </ul>
-
                 <a href="https://pay.kiwify.com.br/Vjtcd4K" class="btn btn-gold" onclick="fbq('track', 'InitiateCheckout');">QUERO VITALÍCIO</a>
             </div>
 
@@ -267,35 +256,33 @@
                 <div class="plan-name">PLANO TURBO</div>
                 <div class="price">R$ 37</div>
                 <div class="period">Acesso por 6 Meses</div>
-                
                 <ul class="benefits">
                     <li><span class="check">✔</span> Curso Completo</li>
                     <li><span class="check">✔</span> Certificado Incluso</li>
                     <li><span class="check">✔</span> Suporte Padrão</li>
                 </ul>
-
                 <a href="https://pay.kiwify.com.br/B5HExOg" class="btn btn-green" onclick="fbq('track', 'InitiateCheckout');">COMPRAR AGORA</a>
             </div>
 
         </div>
+
         <div style="text-align: center; margin-top: 40px; color: #777; font-size: 0.9rem;">
             <p>🔒 Pagamento processado com segurança pela Kiwify.</p>
-            <p>Garantia de 7 dias ou seu dinheiro de volta.</p>
         </div>
 
     </div>
 
-    <div id="sales-popup" class="sales-notification">
-        <div class="sales-icon">✅</div>
-        <div class="sales-text">
-            <strong id="buyer-name">João de São Paulo</strong>
-            <span>acabou de comprar o Plano Black</span>
+    <div id="sales-popup">
+        <div class="sales-icon">🔥</div>
+        <div class="sales-info">
+            <strong id="buyer-name">Pedro de São Paulo</strong>
+            <span id="buyer-action">acabou de comprar o Plano Black</span>
         </div>
     </div>
 
     <script>
-        // --- 1. LÓGICA DO TIMER (15 MINUTOS) ---
-        function startTimer(duration, display) {
+        // --- CONFIGURAÇÃO DO TIMER ---
+        function startCountdown(duration, display) {
             var timer = duration, minutes, seconds;
             setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
@@ -304,57 +291,62 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                display.textContent = minutes + ":" + seconds;
+                if(display) {
+                    display.textContent = minutes + ":" + seconds;
+                }
 
                 if (--timer < 0) {
-                    timer = duration; // Reinicia o timer se acabar
+                    timer = duration;
                 }
             }, 1000);
         }
 
-        window.onload = function () {
-            var fifteenMinutes = 60 * 15,
-                display = document.querySelector('#countdown');
-            startTimer(fifteenMinutes, display);
-            
-            // Inicia as notificações
-            setTimeout(showNotification, 5000); // Primeira notificação em 5 seg
-        };
-
-        // --- 2. LÓGICA DAS NOTIFICAÇÕES (PROVA SOCIAL) ---
-        const buyers = [
-            { name: "Lucas de São Paulo", plan: "Plano Black" },
-            { name: "Mariana do Rio de Janeiro", plan: "Plano Turbo" },
-            { name: "Carlos de Minas Gerais", plan: "Plano Black" },
-            { name: "Fernanda da Bahia", plan: "Plano Black" },
-            { name: "Rafael do Paraná", plan: "Plano Start" },
-            { name: "Júlia de Santa Catarina", plan: "Plano Black" },
-            { name: "Pedro de Goiás", plan: "Plano Turbo" }
+        // --- CONFIGURAÇÃO DA NOTIFICAÇÃO ---
+        var names = [
+            "João de SP", "Maria do RJ", "Carlos de MG", "Ana da BA", 
+            "Lucas do PR", "Fernanda de SC", "Rafael de GO", "Beatriz de PE",
+            "Gabriel do RS", "Juliana do ES"
         ];
-
-        const popup = document.getElementById('sales-popup');
-        const buyerNameEl = document.getElementById('buyer-name');
+        var plans = ["Plano Black", "Plano Turbo", "Plano Black", "Plano Start"];
 
         function showNotification() {
-            // 1. Escolhe um comprador aleatório
-            const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
-            
-            // 2. Atualiza o texto
-            buyerNameEl.innerText = randomBuyer.name;
-            
-            // 3. Mostra o popup
-            popup.classList.add('active');
+            var popup = document.getElementById("sales-popup");
+            var nameElement = document.getElementById("buyer-name");
+            var actionElement = document.getElementById("buyer-action");
 
-            // 4. Esconde depois de 4 segundos
-            setTimeout(() => {
-                popup.classList.remove('active');
-                
-                // 5. Agenda a próxima notificação (tempo aleatório entre 10 e 20 segundos)
-                const nextTime = Math.floor(Math.random() * (20000 - 10000 + 1) + 10000);
-                setTimeout(showNotification, nextTime);
-                
+            if (!popup || !nameElement) return;
+
+            // Sorteia dados
+            var randomName = names[Math.floor(Math.random() * names.length)];
+            var randomPlan = plans[Math.floor(Math.random() * plans.length)];
+
+            // Atualiza texto
+            nameElement.textContent = randomName;
+            actionElement.textContent = "comprou o " + randomPlan;
+
+            // Mostra
+            popup.classList.add("show");
+
+            // Esconde depois de 4 segundos
+            setTimeout(function() {
+                popup.classList.remove("show");
             }, 4000);
+
+            // Re-agenda o próximo (entre 8 e 15 segundos)
+            var nextTime = Math.floor(Math.random() * (15000 - 8000) + 8000);
+            setTimeout(showNotification, nextTime);
         }
+
+        // --- INICIALIZAÇÃO IMEDIATA ---
+        // 1. Inicia o Timer de 15 minutos
+        var displayElement = document.getElementById('timer-display');
+        if(displayElement) {
+            startCountdown(60 * 15, displayElement);
+        }
+
+        // 2. Inicia a primeira notificação em 3 segundos
+        setTimeout(showNotification, 3000);
+
     </script>
 
 </body>
