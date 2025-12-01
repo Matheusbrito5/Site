@@ -20,98 +20,50 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1497918614592795&ev=PageView&noscript=1"
     /></noscript>
+
     <style>
-        :root {
-            --excel-green: #107c41;
-            --dark-bg: #1e1e1e;
-            --gold: #ffc107;
-            --white: #ffffff;
-            --gray-card: #2d2d2d;
-            --alert-red: #dc2626;
-        }
+        /* RESET BÁSICO */
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--dark-bg);
-            color: var(--white);
-            line-height: 1.6;
-            padding-top: 45px; /* Espaço para o timer fixo */
-        }
-        
-        /* 1. BARRA DO TIMER (FIXO NO TOPO) */
-        .sticky-timer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--alert-red);
+            background-color: #1e1e1e;
             color: white;
-            text-align: center;
-            padding: 12px;
-            font-weight: bold;
-            z-index: 9999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            font-size: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .timer-box {
-            background: rgba(0,0,0,0.3);
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-family: monospace;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            padding-top: 50px; /* EMPURRA O SITE PRA BAIXO PRA NÃO FICAR ESCONDIDO ATRÁS DO BANNER */
         }
 
-        /* HEADER / HERO */
+        /* HEADER */
         header {
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             padding: 60px 20px;
             text-align: center;
-            border-bottom: 5px solid var(--excel-green);
+            border-bottom: 5px solid #107c41;
         }
         h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; }
-        h2 { color: var(--excel-green); font-size: 1.5rem; margin-top: 10px; }
+        h2 { color: #107c41; font-size: 1.5rem; margin-top: 10px; }
         
         /* CONTAINER */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        /* GRID DE PREÇOS */
-        .pricing-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        /* CARDS */
+        /* CARDS DE PREÇO */
+        .pricing-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+        
         .card {
-            background-color: var(--gray-card);
+            background-color: #2d2d2d;
             border: 1px solid #444;
             border-radius: 15px;
             padding: 30px;
             width: 300px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column; justify-content: space-between;
             position: relative;
-            transition: transform 0.3s;
         }
 
         .card.featured {
-            border: 3px solid var(--gold);
+            border: 3px solid #ffc107;
             background-color: #383838;
             transform: scale(1.05);
             z-index: 10;
@@ -121,99 +73,49 @@
         .plan-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: #ddd; text-transform: uppercase; }
         .price { font-size: 3rem; font-weight: 800; margin: 10px 0; color: white; }
         .period { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
-        .price-gold { color: var(--gold); }
-        
+        .price-gold { color: #ffc107; }
+
         .tag-destaque {
-            background-color: var(--gold);
-            color: black;
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 20px;
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            background-color: #ffc107; color: black; font-weight: bold;
+            padding: 5px 15px; border-radius: 20px;
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            font-size: 0.8rem; text-transform: uppercase;
         }
 
         /* BOTÕES */
-        .btn {
-            display: block;
-            padding: 15px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 15px;
-            transition: 0.2s;
-        }
-        .btn-green { background-color: var(--excel-green); color: white; }
+        .btn { display: block; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; margin-top: 15px; transition: 0.2s; }
+        .btn-green { background-color: #107c41; color: white; }
         .btn-green:hover { background-color: #0c5c30; }
-        .btn-gold { background-color: var(--gold); color: black; border: 2px solid #e0a800; }
+        .btn-gold { background-color: #ffc107; color: black; border: 2px solid #e0a800; }
         .btn-gold:hover { background-color: #d39e00; }
 
         /* LISTA */
-        .benefits {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-        .benefits li {
-            margin-bottom: 8px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 5px;
-        }
-        .check { color: var(--excel-green); margin-right: 5px; }
+        .benefits { list-style: none; padding: 0; margin: 20px 0; text-align: left; font-size: 0.9rem; color: #ccc; }
+        .benefits li { margin-bottom: 8px; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        .check { color: #107c41; margin-right: 5px; }
 
-        /* 2. NOTIFICAÇÃO POPUP (CSS) */
-        #sales-popup {
-            visibility: hidden; /* Começa invisível */
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: white;
-            color: #333;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 10000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
-            border-left: 5px solid var(--excel-green);
-            max-width: 320px;
+        /* POPUP NOTIFICAÇÃO (Estilos fixos no CSS) */
+        #aviso-venda {
+            visibility: hidden; position: fixed; bottom: 20px; left: 20px;
+            background-color: white; color: #333; padding: 15px 20px;
+            border-radius: 8px; box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 15px; z-index: 10000;
+            opacity: 0; transform: translateY(20px); transition: 0.5s;
+            border-left: 5px solid #107c41; max-width: 300px;
         }
-        /* Classe que faz aparecer */
-        #sales-popup.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .sales-icon { font-size: 24px; }
-        .sales-info strong { display: block; font-size: 0.95rem; color: #111; }
-        .sales-info span { font-size: 0.85rem; color: #666; }
-
+        #aviso-venda.ativo { visibility: visible; opacity: 1; transform: translateY(0); }
+        
         @media (max-width: 768px) {
             .pricing-section { flex-direction: column; align-items: center; }
             .card { width: 100%; max-width: 320px; }
             .card.featured { transform: scale(1); margin: 20px 0; }
-            .sticky-timer { font-size: 0.85rem; }
-            #sales-popup { left: 10px; right: 10px; bottom: 10px; max-width: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="sticky-timer">
-        <span>⚠️ ÚLTIMAS VAGAS COM DESCONTO:</span>
-        <span class="timer-box" id="timer-display">14:59</span>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 50px; background-color: #dc2626; color: white; display: flex; align-items: center; justify-content: center; z-index: 999999; box-shadow: 0 2px 10px rgba(0,0,0,0.5); font-weight: bold; font-family: monospace; font-size: 1.1rem;">
+        🔥 OFERTA ENCERRA EM:&nbsp;<span id="tempo-restante">15:00</span>
     </div>
 
     <header>
@@ -240,7 +142,7 @@
 
             <div class="card featured">
                 <div class="tag-destaque">MAIS VENDIDO</div>
-                <div class="plan-name" style="color: var(--gold);">PLANO BLACK</div>
+                <div class="plan-name" style="color: #ffc107;">PLANO BLACK</div>
                 <div class="price price-gold">R$ 67</div>
                 <div class="period" style="color: white;">Acesso <strong>VITALÍCIO</strong></div>
                 <ul class="benefits">
@@ -272,81 +174,74 @@
 
     </div>
 
-    <div id="sales-popup">
-        <div class="sales-icon">🔥</div>
-        <div class="sales-info">
-            <strong id="buyer-name">Pedro de São Paulo</strong>
-            <span id="buyer-action">acabou de comprar o Plano Black</span>
+    <div id="aviso-venda">
+        <div style="font-size: 24px;">🔥</div>
+        <div>
+            <strong id="nome-comprador" style="display:block; color:#111; font-size:0.9rem;">Pedro de SP</strong>
+            <span id="acao-comprador" style="font-size:0.8rem; color:#666;">acabou de comprar</span>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURAÇÃO DO TIMER ---
-        function startCountdown(duration, display) {
-            var timer = duration, minutes, seconds;
+        // 1. TIMER (Contagem Regressiva)
+        function iniciarTimer(duracao, display) {
+            var timer = duracao, minutos, segundos;
             setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+                minutos = parseInt(timer / 60, 10);
+                segundos = parseInt(timer % 60, 10);
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+                minutos = minutos < 10 ? "0" + minutos : minutos;
+                segundos = segundos < 10 ? "0" + segundos : segundos;
 
-                if(display) {
-                    display.textContent = minutes + ":" + seconds;
+                if (display) {
+                    display.textContent = minutos + ":" + segundos;
                 }
 
                 if (--timer < 0) {
-                    timer = duration;
+                    timer = duracao; // Reinicia quando acaba
                 }
             }, 1000);
         }
 
-        // --- CONFIGURAÇÃO DA NOTIFICAÇÃO ---
-        var names = [
-            "João de SP", "Maria do RJ", "Carlos de MG", "Ana da BA", 
-            "Lucas do PR", "Fernanda de SC", "Rafael de GO", "Beatriz de PE",
-            "Gabriel do RS", "Juliana do ES"
-        ];
-        var plans = ["Plano Black", "Plano Turbo", "Plano Black", "Plano Start"];
+        // 2. NOTIFICAÇÕES FALSAS (Prova Social)
+        var nomes = ["João de SP", "Maria do RJ", "Carlos de MG", "Ana da BA", "Lucas do PR", "Fernanda de SC", "Rafael de GO"];
+        var planos = ["Plano Black", "Plano Turbo", "Plano Black", "Plano Start"];
 
-        function showNotification() {
-            var popup = document.getElementById("sales-popup");
-            var nameElement = document.getElementById("buyer-name");
-            var actionElement = document.getElementById("buyer-action");
+        function mostrarNotificacao() {
+            var popup = document.getElementById("aviso-venda");
+            var nomeEl = document.getElementById("nome-comprador");
+            var acaoEl = document.getElementById("acao-comprador");
 
-            if (!popup || !nameElement) return;
+            if (!popup) return;
 
-            // Sorteia dados
-            var randomName = names[Math.floor(Math.random() * names.length)];
-            var randomPlan = plans[Math.floor(Math.random() * plans.length)];
+            // Sorteia
+            var rNome = nomes[Math.floor(Math.random() * nomes.length)];
+            var rPlano = planos[Math.floor(Math.random() * planos.length)];
 
-            // Atualiza texto
-            nameElement.textContent = randomName;
-            actionElement.textContent = "comprou o " + randomPlan;
+            nomeEl.textContent = rNome;
+            acaoEl.textContent = "garantiu o " + rPlano;
 
             // Mostra
-            popup.classList.add("show");
+            popup.classList.add("ativo");
 
-            // Esconde depois de 4 segundos
-            setTimeout(function() {
-                popup.classList.remove("show");
+            // Esconde
+            setTimeout(function(){
+                popup.classList.remove("ativo");
             }, 4000);
 
-            // Re-agenda o próximo (entre 8 e 15 segundos)
-            var nextTime = Math.floor(Math.random() * (15000 - 8000) + 8000);
-            setTimeout(showNotification, nextTime);
+            // Próxima vez (aleatório entre 5 e 10 seg)
+            setTimeout(mostrarNotificacao, Math.random() * 5000 + 5000);
         }
 
-        // --- INICIALIZAÇÃO IMEDIATA ---
-        // 1. Inicia o Timer de 15 minutos
-        var displayElement = document.getElementById('timer-display');
-        if(displayElement) {
-            startCountdown(60 * 15, displayElement);
-        }
+        // INICIALIZA TUDO AO CARREGAR
+        window.onload = function () {
+            // Liga o Timer
+            var display = document.getElementById('tempo-restante');
+            if(display) iniciarTimer(60 * 15, display);
 
-        // 2. Inicia a primeira notificação em 3 segundos
-        setTimeout(showNotification, 3000);
-
+            // Liga a Notificação (começa em 3 seg)
+            setTimeout(mostrarNotificacao, 3000);
+        };
     </script>
 
 </body>
