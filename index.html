@@ -14,7 +14,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1497918614592795');
+    fbq('init', '1497918614592795'); 
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -36,7 +36,7 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px; /* Aumentei um pouco para caber os 3 cards */
             margin: 0 auto;
             padding: 20px;
             text-align: center;
@@ -71,21 +71,22 @@
             margin-right: auto;
         }
         
-        /* BOTÃO */
+        /* BOTÃO GERAL */
         .btn-cta {
             background-color: var(--excel-green);
             color: white;
-            padding: 20px 45px;
-            font-size: 1.4rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
             display: inline-block;
             transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 4px 15px rgba(16, 124, 65, 0.5);
-            animation: pulse 2s infinite;
             margin-top: 10px;
             border: 2px solid #159c53;
+            width: 100%; /* Ocupa largura do card */
+            box-sizing: border-box;
         }
         .btn-cta:hover {
             transform: scale(1.05);
@@ -126,54 +127,75 @@
             font-size: 1.4rem;
         }
         
-        /* OFERTA */
-        .price-box {
-            background-color: #262626;
-            border: 2px solid var(--gold);
-            padding: 40px 20px;
-            border-radius: 15px;
+        /* NOVA ÁREA DE PREÇOS (3 CARDS) */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
             margin-top: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
         }
-        .old-price {
-            font-size: 1.3rem;
-            text-decoration: line-through;
-            color: #888;
-            margin-bottom: 5px;
+        .pricing-card {
+            background-color: #262626;
+            border: 1px solid #444;
+            padding: 30px 20px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
         }
-        .new-price {
-            font-size: 4rem;
-            color: var(--gold);
+        /* Destaque para o Vitalício */
+        .pricing-card.highlight {
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+            background-color: #2d2d2d;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+
+        .plan-title {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .price-val {
+            font-size: 3rem;
+            color: var(--white);
             font-weight: 800;
-            margin: 0;
+            margin: 10px 0;
             line-height: 1;
+        }
+        .price-val.gold-text {
+            color: var(--gold);
+        }
+        .plan-period {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
         .bonus-tag {
             background-color: var(--gold);
             color: #000;
-            padding: 8px 20px;
-            border-radius: 4px;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-weight: 800;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 124, 65, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 124, 65, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 124, 65, 0); }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 { font-size: 2rem; }
-            .new-price { font-size: 3rem; }
-            .btn-cta { width: 80%; font-size: 1.2rem; }
+            .pricing-card.highlight { transform: scale(1); margin: 20px 0; }
         }
     </style>
 </head>
@@ -185,7 +207,7 @@
             <h2>O Básico que Funciona</h2>
             <p class="headline-sub">Domine as ferramentas essenciais para passar em testes de emprego e se destacar no trabalho. Sem enrolação.</p>
             
-            <a href="https://pay.kiwify.com.br/FCNu3ve" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">
+            <a href="#oferta" class="btn-cta" style="max-width: 300px;">
                 QUERO MINHA VAGA AGORA ➔
             </a>
         </div>
@@ -194,7 +216,7 @@
     <div class="section-white">
         <div class="container">
             <h3>Cansado de travar na frente da planilha?</h3>
-            <p style="font-size: 1.1rem;">Você não precisa de um curso teórico de 100 horas. <br>Você precisa aprender o que as empresas <strong>REALMENTE</strong> cobram no dia a dia.</p>
+            <p style="font-size: 1.1rem;">Você não precisa de um curso teórico de 100 horas. <br>Você precisa aprender o que as empresas <strong>REALMENTE</strong> cobram.</p>
             
             <ul class="benefit-list">
                 <li><span class="check">✓</span> <div><strong>Fórmulas que Salvam:</strong> Aprenda PROCV, SE, SOMASE de forma simples.</div></li>
@@ -205,29 +227,49 @@
         </div>
     </div>
 
-    <div class="container" style="padding-bottom: 60px;">
-        <div class="price-box">
-            <span class="bonus-tag">Oferta por Tempo Limitado</span>
-            <p style="margin-top: 15px; font-size: 1.1rem;">Leve o acesso completo:</p>
+    <div id="oferta" class="container" style="padding-bottom: 80px;">
+        <h3 style="margin-bottom: 10px;">Escolha o Melhor Plano</h3>
+        <p style="color: #ccc; margin-bottom: 30px;">Acesso imediato após a confirmação.</p>
+
+        <div class="pricing-grid">
             
-            <div class="old-price">De R$ 97,00</div>
-            <div class="new-price">R$ 37,00</div>
-            <p style="color: #ccc; margin-top: 5px;">Pagamento Único | Acesso Vitalício</p>
-            
-            <a href="https://pay.kiwify.com.br/FCNu3ve" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">
-                COMPRAR AGORA
-            </a>
-            
-            <div style="margin-top: 25px; border-top: 1px solid #444; padding-top: 20px;">
-                <p style="font-size: 0.95rem; color: #aaa; line-height: 1.4;">
-                    🔒 <strong>Compra 100% Segura</strong><br>
-                    7 Dias de Garantia Incondicional.
-                </p>
-                <p style="font-size: 0.9rem; color: #ffc107; margin-top: 15px;">
-                    <strong>🎁 BÔNUS NO CARRINHO:</strong><br>
-                    Libere o <em>Pack de Planilhas</em> e o <em>Guia de Bolso</em> com desconto exclusivo na próxima etapa.
-                </p>
+            <div class="pricing-card">
+                <div>
+                    <div class="plan-title">Básico</div>
+                    <div class="price-val">R$ 27</div>
+                    <div class="plan-period">Acesso por 3 Meses</div>
+                    <p style="font-size: 0.9rem; color:#aaa;">Curso Completo<br>Certificado Incluso</p>
+                </div>
+                <a href="https://pay.kiwify.com.br/mX3muvA" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">COMPRAR</a>
             </div>
+
+            <div class="pricing-card highlight">
+                <span class="bonus-tag">Recomendado</span>
+                <div>
+                    <div class="plan-title" style="color: var(--gold); font-weight:bold;">Profissional</div>
+                    <div class="price-val gold-text">R$ 67</div>
+                    <div class="plan-period">Acesso <strong style="color:white;">VITALÍCIO</strong></div>
+                    <p style="font-size: 0.9rem; color:#ddd;">+ Bônus Exclusivos<br>+ Suporte Prioritário<br>+ Atualizações Grátis</p>
+                </div>
+                <a href="https://pay.kiwify.com.br/Vjtcd4K" class="btn-cta" style="background-color: var(--gold); color: black; border-color: #e0a800;" onclick="fbq('track', 'InitiateCheckout');">QUERO VITALÍCIO</a>
+            </div>
+
+            <div class="pricing-card">
+                <div>
+                    <div class="plan-title">Intermediário</div>
+                    <div class="price-val">R$ 37</div>
+                    <div class="plan-period">Acesso por 6 Meses</div>
+                    <p style="font-size: 0.9rem; color:#aaa;">Curso Completo<br>Suporte Padrão</p>
+                </div>
+                <a href="https://pay.kiwify.com.br/B5HExOg" class="btn-cta" onclick="fbq('track', 'InitiateCheckout');">COMPRAR</a>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 0.9rem; color: #888;">
+                🔒 <strong>Compra 100% Segura.</strong> 7 Dias de Garantia Incondicional.
+            </p>
         </div>
     </div>
 
